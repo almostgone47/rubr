@@ -1,5 +1,7 @@
 development:
-  adapter: mysql2
+  adapter: postgresql
+  encoding: unicode
   database: rubr_development
   pool: 5
-  reconnect: true
+  username:
+  password:
