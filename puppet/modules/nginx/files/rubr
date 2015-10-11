@@ -1,0 +1,16 @@
+upstream rubr_dev {
+      server localhost:8080;
+}
+
+
+server {
+	listen       *:80;
+	server_name  rubr_dev.dev;
+    proxy_set_header Host $host;
+
+	location / {
+		proxy_pass  http://rubr_dev;
+		proxy_redirect off;
+	}
+}
+
