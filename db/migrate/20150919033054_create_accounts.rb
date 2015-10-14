@@ -35,6 +35,8 @@ class CreateAccounts < ActiveRecord::Migration
       # TODO: check privilege
       t.string      :orientation
       t.string      :gender
+
+      t.string      :profile_image,   default: "http://i.imgur.com/774CSj2.png"
     end
   end
 

@@ -9,6 +9,7 @@ gem 'pg'
 gem 'puma'
 gem 'kgio'
 gem 'connection_pool'
+gem 'httpclient'
 
 
 

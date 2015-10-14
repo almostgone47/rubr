@@ -21,13 +21,13 @@ ActiveRecord::Schema.define(version: 20151011100712) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "user_name",                       null: false
+    t.string   "user_name",                                                  null: false
     t.string   "city"
     t.string   "state"
     t.string   "zip"
     t.string   "email"
     t.boolean  "email_confirmed", default: false
-    t.string   "password_digest",                 null: false
+    t.string   "password_digest",                                            null: false
     t.string   "auth_token"
     t.string   "description"
     t.string   "sign_up_token"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20151011100712) do
     t.string   "looking_for"
     t.string   "orientation"
     t.string   "gender"
+    t.string   "profile_image",   default: "http://i.imgur.com/774CSj2.png"
   end
 
   create_table "messages", force: :cascade do |t|
