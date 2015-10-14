@@ -37,6 +37,8 @@ class CreateAccounts < ActiveRecord::Migration
       t.string      :gender
 
       t.string      :profile_image,   default: "http://i.imgur.com/774CSj2.png"
+
+      t.integer     :age,             default: 18
     end
   end
 

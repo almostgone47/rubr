@@ -1,0 +1,14 @@
+= form_tag sessions_path, :id => "login_form" do
+  .input-group
+    = label_tag :user_name
+      | User Name
+    = text_field_tag :user_name, params[:user_name]
+  .input-group
+    = label_tag :password
+    = password_field_tag :password
+  /.input-group.fade
+    = check_box_tag :remember_me, 1, params[:remember_me]
+    = label_tag :remember_me
+  .actions
+    = submit_tag "Sign In", :class => 'btn btn-primary btn-full'
+

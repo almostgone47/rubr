@@ -1,0 +1,19 @@
+h1 People
+table
+  tr
+    th Image
+    th First Name
+    th Last Name
+    th Gender
+    th Description
+    th Age
+  - @people.each do |person|
+    tr
+      td
+        a href="#{person.profile_image}" 
+          img src="#{person.profile_image}" style="width:50px;height:50px;"
+      td = person.first_name
+      td = person.last_name
+      td = person.gender
+      td = person.description
+      td = person.age
