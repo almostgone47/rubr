@@ -1,17 +1,22 @@
 doctype html
 html.no-js
   head
-    title Rubr
+    title Crop Tech Solutions
     meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"
+    = render "layouts/favicons"
     = stylesheet_link_tag "application", media: "all"
     = stylesheet_link_tag "//fonts.googleapis.com/css?family=Raleway:400,300"
+    /[if IE]
+      = stylesheet_link_tag "no_ie", media: "all"
     = yield :head
     = csrf_meta_tags
   body
     div.app-wrapper
+      = render partial: 'layouts/navigation'
       = render partial: 'layouts/header_bar'
+      = render partial: 'layouts/status_header'
       .header-print-logo
-        = image_tag "http://i.imgur.com/3uRYIcO.png"
+        = image_tag "CropTech-logo-color.png"
       .main-content
         .css-arrow#notification_arrow
         .container

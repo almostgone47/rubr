@@ -1,19 +1,98 @@
 h1 People
-table
-  tr
-    th Image
-    th First Name
-    th Last Name
-    th Gender
-    th Description
-    th Age
-  - @people.each do |person|
-    tr
-      td
-        a href="#{person.profile_image}" 
-          img src="#{person.profile_image}" style="width:50px;height:50px;"
-      td = person.first_name
-      td = person.last_name
-      td = person.gender
-      td = person.description
-      td = person.age
+
+div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
+  p.status-tag Getting People near you...
+  div.picture-holder style="width:500px; margin:0 auto;outline: #000000 solid thick;"
+    a.profile-picture-link href=""
+      img.profile-picture style="width: 500px;height: 500px" src = ""
+  p.person-name
+  p.person-age
+  p.person-description
+  a.btn.like-button href="#like" data-person_id=1 Like
+  a.btn.dislike-button href="#dislike" data-person_id=1 Dislike
+
+= content_for :footer do
+  javascript:
+    var counter = 0
+    var people = new Array()
+    function updatePage() {
+      console.log(counter)
+      console.log(people.length)
+      console.log("")
+      if (counter > people.length-1) {
+        $(".status-tag").show();
+        $(".status-tag").html("Looking for more matches..")
+        $(".profile-picture-link").hide();
+        $(".profile-picture").hide();
+        $(".person-name").hide();
+        $(".person-age").hide();
+        $(".person-description").hide();
+        $(".btn.like-button").hide();
+        $(".btn.dislike-button").hide();
+        getPeople()
+      }
+      else {
+        person = people[counter]
+        $(".profile-picture-link").show();
+        $(".profile-picture").show();
+        $(".person-name").show();
+        $(".person-age").show();
+        $(".person-description").show();
+        $(".btn.like-button").show();
+        $(".btn.dislike-button").show();
+
+        $(".profile-picture-link").attr('href', person.profile_image);
+        $(".profile-picture").attr('src', person.profile_image);
+        $(".person-name").html(person.first_name+" "+person.last_name);
+        $(".person-age").html(person.age);
+        $(".person-description").html(person.description);
+        $(".btn.like-button").attr("data-person_id", person.id)
+        $(".btn.dislike-button").attr("data-person_id", person.id)
+      }
+    }
+
+    function getPeople() {
+      $.ajax({ url: "get_people", data: $(this).data(), success: function(data){
+        if (data.length > 0) {
+          console.log(data)
+          people = data
+          $(".status-tag").hide();
+          updatePage()
+        }
+        else {
+          $(".status-tag").show();
+          $(".status-tag").html("Unable to find anyone else near you. Sorry about that!");
+          $(".profile-picture-link").hide();
+          $(".profile-picture").hide();
+          $(".person-name").hide();
+          $(".person-age").hide();
+          $(".person-description").hide();
+          $(".btn.like-button").hide();
+          $(".btn.dislike-button").hide();
+        }
+      }, dataType: "json"});
+    }
+
+    $("a.like-button").on("click", function(evt) {
+      var rated_person_id = $("a.like-button").attr("data-person_id");
+      $.ajax({ url: "like_person",
+              type: "post",
+              data: {rated_person_id: rated_person_id},
+              success: function(data){
+                         counter = counter + 1;
+                         updatePage()
+                       }});
+    })
+
+    $("a.dislike-button").on("click", function(evt) {
+      var rated_person_id = $("a.dislike-button").attr("data-person_id");
+      $.ajax({ url: "dislike_person",
+              type: "post",
+              data: {rated_person_id: rated_person_id},
+              success: function(data){
+                         counter = counter + 1;
+                         updatePage()
+                       }});
+    })
+
+    getPeople();

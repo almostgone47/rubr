@@ -1,0 +1,96 @@
+header.navbar.navbar-fixed-top
+  .container
+    .nav-toggle.icon.icon-reorder.icon2x
+    .navbar-header
+
+      / this icon will change on a per-section basis.  For
+      / now I am using 'if false' so it doesn't show until hooked up.
+      - if true
+        .nav-status.pull-right
+          i class=@section_icon
+          .section-name.hidden-sm.hidden-xs
+            | Working in:&nbsp;
+            =@current_section
+          .section-name.hidden-md.hidden-lg
+            =@current_section
+      - if !current_farm
+        .dropdown.pull-right
+          a.btn.pull-right data-toggle="dropdown"
+            i.icon.icon-user
+            /span Account
+          ul.dropdown-menu role="menu"
+            li.dropdown-header role="presentation"
+              a role="menuitem" href="/sign_out" Sign Out
+            li.dropdown-header role="presentation"
+              a role="menuitem" href=admin_change_password_path Change Password
+      - if current_farm
+        .dropdown.pull-right
+          a.btn.farm-status.pull-right data-toggle="dropdown"
+            i.icon.icon-placepin
+            span.year = current_farm.farm_crop_year
+            span.name.hidden-sm.hidden-xs = current_farm.name
+          ul.dropdown-menu role="menu"
+            li.dropdown-header role="presentation"
+              = current_farm.name
+            / IF NOT AN ADMIN
+            - if !current_account.is_admin?
+              li role="presentation"
+                a role="menuitem" href="/dashboard" Farm Overview
+              li role="presentation"
+                a role="menuitem" href="/switch_farms" Switch Farms
+              li
+                - accessible_crop_years = current_farm.crop_years.map(&:farm_crop_year).select do |crop_year|
+                  - current_account.farms.map(&:farm_crop_year).include?(crop_year)
+                - accessible_crop_years.each do |farm|
+                  a href="/switch_year?crop_year=#{farm}" #{farm}
+
+            / IF ADMIN
+            - if current_account.is_admin?
+              li role="presentation"
+                a role="menuitem" href="/admin/farm/dashboard" Farm Overview
+              li role="presentation"
+                a role="menuitem" href="/admin/farm/notifications/new" Notify Farmer
+            - if managed_farm
+              li role="presentation"
+                a role="menuitem" href="/admin/farm/stop_managing" Stop Managing
+              - if Permissions::TerritoryFarm::can_manage?(current_account, managed_farm.territory)
+                li
+                  a href=admin_farm_crop_years_path Manage Crop Years
+                  - accessible_crop_years = managed_farm.crop_years.map(&:farm_crop_year).select do |crop_year|
+                    - current_account.farms.map(&:farm_crop_year).include?(crop_year)
+                  - accessible_crop_years.each do |farm|
+                    a href="/admin/farm/switch_year?crop_year=#{farm}" #{farm}
+            - if current_account.is_admin?
+              li
+                a role="menuitem" href=admin_change_password_path Change Password
+            - if !current_account.is_admin?
+              li 
+                a role="menuitem" href=change_password_path Change Password
+            a.dropdown-footer role="presentation" href="/sign_out" Sign Out
+
+      .dropdown.feedback.pull-right
+        a.btn.btn-info.pull-right data-toggle="dropdown" title="Suggest ways to make Crop Tech better."
+          i.icon.icon-white_question
+          | Feedback
+        ul.dropdown-menu role="menu"
+          li.dropdown-header role="presentation"
+            | What is your feedback in relation to?
+          form method="post" action="https://goforms.herokuapp.com/form"
+            input type="hidden" name="account name" value="#{@current_account.full_name}"
+            input type="hidden" name="account email" value="#{@current_account.email}"
+
+            select name="type of feedback"
+              option Send a message to Jim
+              option I found a possible bug
+              option I have a suggestion for a new feature
+              option I have a suggestion for an improvement on a feature
+              option I am not sure how to do something
+              option Other
+
+            textarea name="feedback" placeholder="Write us in here and hit 'send'"
+            input type="hidden" name="form_id" value="ct_app_feedback"
+            input.dropdown-footer type="submit" value="Send" role="presentation" href="#"
+
+      a href="/"
+        #logo.logo-main
+

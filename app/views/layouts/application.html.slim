@@ -8,11 +8,17 @@ html.no-js
     = yield :head
     = csrf_meta_tags
   body
-    div.app-wrapper
+    div.app-wrapper 
       = render partial: 'layouts/header_bar'
-      .header-print-logo
-        = image_tag "http://i.imgur.com/3uRYIcO.png"
-      .main-content
+      .header-print-logo 
+        div.header style="border: 2px solid #8AC007;"
+          = image_tag "http://i.imgur.com/3uRYIcO.png"
+          br
+          a href="/dashboard" Find People
+          br
+          a href="/messages" Messages
+          br
+        .main-content
         .css-arrow#notification_arrow
         .container
           #content

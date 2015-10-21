@@ -35,21 +35,30 @@ ActiveRecord::Schema.define(version: 20151011100712) do
     t.string   "longitude"
     t.string   "latitude"
     t.datetime "last_active"
-    t.integer  "likes",           default: 25
+    t.integer  "like_tokens",     default: 25
     t.string   "looking_for"
     t.string   "orientation"
     t.string   "gender"
     t.string   "profile_image",   default: "http://i.imgur.com/774CSj2.png"
     t.integer  "age",             default: 18
+    t.boolean  "fake_account",    default: false
   end
 
   create_table "messages", force: :cascade do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "body",                       null: false
+    t.text     "body",                        null: false
     t.datetime "sent_at"
-    t.boolean  "read",       default: false
+    t.boolean  "read",        default: false
     t.datetime "read_at"
+    t.integer  "sender_id"
+    t.integer  "receiver_id"
+  end
+
+  create_table "rating_connections", force: :cascade do |t|
+    t.integer "rater_id",    null: false
+    t.integer "ratee_id",    null: false
+    t.string  "rating_type"
   end
 
 end

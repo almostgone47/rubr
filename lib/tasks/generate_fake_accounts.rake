@@ -80,6 +80,9 @@ task :generate_fake_accounts, [:amount] => :environment do |t, args|
     age = rand(18..45)
     profile_picture = get_profile_image
 
+
+    noun = nouns.sample
+    adjective = adjectives.sample
     puts "Creating #{first_name} #{last_name} with description '#{description}' and profile_picture #{profile_picture}"
     Account.create!(
       first_name: first_name,
@@ -88,13 +91,14 @@ task :generate_fake_accounts, [:amount] => :environment do |t, args|
       zip: zip,
       description: description,
       age: age,
-      #profile_image: profile_picture,
+      profile_image: profile_picture,
       password: "password",
-      user_name: "FakeAccount#{total_accounts+i}",
-      email: "sturgeonb4@gmail.com"
+      user_name: "#{adjective}#{noun}#{total_accounts+i}",
+      email: "sturgeonb4@gmail.com",
+      fake_account: true
     )
-
-  #sleep 1
+  # Being nice to Imgur
+  sleep 1
 
 
   # TODO: add lookingfor, :orientation

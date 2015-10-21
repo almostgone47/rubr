@@ -23,7 +23,7 @@ class CreateAccounts < ActiveRecord::Migration
       t.datetime    :last_active
 
       # TODO: work on the wording for this, do we call them likes?
-      t.integer     :likes,           default: 25
+      t.integer     :like_tokens,     default: 25
 
       # This could be a string seperated by something?
       # eg: "male|female|robot" with extra genders and all that included.
@@ -39,10 +39,21 @@ class CreateAccounts < ActiveRecord::Migration
       t.string      :profile_image,   default: "http://i.imgur.com/774CSj2.png"
 
       t.integer     :age,             default: 18
+
+      t.boolean     :fake_account,    default: false
+    end
+
+    create_table "rating_connections", :force => true do |t|
+      # Person doing the rating
+      t.integer     :rater_id, :null => false
+      # Person being rated
+      t.integer     :ratee_id, :null => false
+      t.string      :rating_type
     end
   end
 
   def self.down
     drop_table "accounts"
+    drop_table "rating_connections"
   end
 end

@@ -7,6 +7,8 @@ class CreateMessages < ActiveRecord::Migration
       t.datetime    :sent_at
       t.boolean     :read,    default: false
       t.datetime    :read_at
+      t.integer     :sender_id
+      t.integer     :receiver_id
     end
   end
 

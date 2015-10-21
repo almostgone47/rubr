@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>CropTech</title>
+		<link rel="stylesheet" href="/bootstrap/css/printable_report.css" />
+		<link rel="stylesheet" href="/css/printable_report.css" />
+	</head>
+	<body>
+
+		<table class="table">
+			<tr>
+				<td>
+					<img src="/img/logo.jpg" width="270"><br/>
+					<strong>Crop Tech Solutions</strong><br/>
+					41115 Road 763<br/>
+					Gothenburg, NE 69138<br/>
+					<br/>
+					Manager: <%= @client.admin.name %><br/>
+					Phone: 555-555-5555
+				</td>
+				<td class="text-right text-bottom">
+					<strong><%= @client.name %></strong><br/>
+					<%= @client.address %><br/>
+					Ph: <%= @client.phone %><br/>
+					<br/>
+
+					Report Date: <%= Time.now.strftime("%B %-d, %Y") %>
+				</td>
+			</tr>
+		</table>
+	
+		<hr size="1"/>	
+
+		<%= yield %>
+
+		<hr size="1"/>
+		
+		&copy; 2013 Crop Tech Solutions &middot; 
+					41115 Road 763 &middot; 
+					Gothenburg, NE 69138
+	</body>
+</html>

@@ -1,6 +1,11 @@
 class Account < ActiveRecord::Base
   has_secure_password
 
+  has_many(:rating_connections, :foreign_key => :rater_id, :dependent => :destroy)
+  has_many(:reverse_rating_connections, :class_name => :RatingConnection,
+           :foreign_key => :ratee_id, :dependent => :destroy)
+  has_many :ratings, :through => :rating_connections, :source => :ratee
+
   # TODO: has_and_belongs_to_many accounts for matches
   before_create { generate_token(:auth_token) }
 
@@ -10,6 +15,78 @@ class Account < ActiveRecord::Base
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  # Get info about likes/dislikes
+  def all_likes
+    self.ratings.where(rating_type: "like")
+  end
+
+  def all_dislikes
+    self.ratings.where(rating_type: "dislike")
+  end
+
+  # TODO: test this
+  def has_rated? account
+    self.ratings.include? account
+  end
+
+  # Set info about likes/dislikes
+  def like account
+    if account
+      if account != self
+        # TODO do like_token checks here
+        RatingConnection.create(
+          rater: self,
+          ratee: account,
+          rating_type: "like"
+        )
+
+        # Like them back
+        if account.fake_account
+          RatingConnection.create(
+            rater: account,
+            ratee: self,
+            rating_type: "like"
+          )
+        end
+      end
+    end
+  end
+
+  def dislike account
+    if account
+      if account != self
+        RatingConnection.create(
+          rater: self,
+          ratee: account,
+          rating_type: "dislike"
+        )
+      end
+    end
+  end
+
+  def is_matched? account
+    if account
+      if self.ratings.include? account
+        if account.ratings.include? self
+          return true
+        end
+      end
+    end
+    return false
+  end
+
+  # TOOD: IT KEEPS GETTING WORSE, WHY DID YOU WRITE
+  # MESSAGES LIKE THIS. STOP IT.
+  def messages_with account
+    if account
+      results = Message.where(sender_id: [self.id, account.id],
+                    receiver_id: [self.id, account.id]).order(sent_at: :asc)
+      puts results
+      return results
+
+    end
   end
 
   def generate_token(column)

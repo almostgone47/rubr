@@ -1,0 +1,26 @@
+div.chain-holder style="height: 600px;width: 500px;border: 1px black solid;"
+  div.scrollable-content style="height: 580px;overflow: auto;background-color: white;"
+    -cur_account_id = current_account.id
+    ul.message-list
+      - @messages.each do |message|
+        - if message.sender_id == cur_account_id
+          li
+            p style="color: blue" = "[#{message.sent_at}] You: #{message.body}"
+        - else
+          li
+            p style="color: red" = "[#{message.sent_at}] Them: #{message.body}"
+
+= form_for @message ,:html => {:class =>"message_form"} do |f|
+  fieldset
+    legend Send Message
+
+    .field
+      = f.label :body
+      = f.text_field :body  ,:placeholder => "Say something nice here!" , :autofocus => ''
+
+    .field
+      = f.hidden_field :receiver_id, value: params[:id]
+
+    div align="center"
+      .actions = f.submit 'Send'
+
