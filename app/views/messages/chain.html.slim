@@ -1,4 +1,4 @@
-div.chain-holder style="height: 600px;width: 500px;border: 1px black solid;"
+div.chain-holder style="height: 600px;width: 500px;border: 1px black solid; margin:0 auto;"
   div.scrollable-content style="height: 580px;overflow: auto;background-color: white;"
     -cur_account_id = current_account.id
     ul.message-list
@@ -10,17 +10,18 @@ div.chain-holder style="height: 600px;width: 500px;border: 1px black solid;"
           li
             p style="color: red" = "[#{message.sent_at}] Them: #{message.body}"
 
-= form_for @message ,:html => {:class =>"message_form"} do |f|
-  fieldset
-    legend Send Message
+div.send-message style="width: 500px;margin: 0 auto;"
+  = form_for @message ,:html => {:class =>"message_form"} do |f|
+    fieldset
+      legend Send Message
 
-    .field
-      = f.label :body
-      = f.text_field :body  ,:placeholder => "Say something nice here!" , :autofocus => ''
+      .field
+        = f.label :body
+        = f.text_field :body  ,:placeholder => "Say something nice here!" , :autofocus => ''
 
-    .field
-      = f.hidden_field :receiver_id, value: params[:id]
+      .field
+        = f.hidden_field :receiver_id, value: params[:id]
 
-    div align="center"
-      .actions = f.submit 'Send'
+      div align="center"
+        .actions = f.submit 'Send'
 

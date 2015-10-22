@@ -8,7 +8,8 @@ Rails.application.routes.draw do
 
   resources :sessions
 
-  get "dashboard", to: "pages#dashboard"
+  get "people", to: "pages#people"
+  get "/", to: "pages#people"
 
   get "get_people", to: "pages#get_people"
 

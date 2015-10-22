@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
 
-  def dashboard
+  def people
     @people = Account.all
   end
 

@@ -12,6 +12,7 @@ gem 'connection_pool'
 gem 'httpclient'
 gem 'slim-rails'
 gem "unirest"
+gem "quiet_assets"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

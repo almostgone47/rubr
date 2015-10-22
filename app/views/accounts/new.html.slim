@@ -1,38 +1,50 @@
-= form_for @account ,:html => {:class =>"account_form"} do |f|
-  fieldset
-    legend Create Account
-    - if @account.errors.any?
-      #error_explanation
-        h2 = "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
-        ul
-          - @account.errors.full_messages.each do |message|
-            li = message
+div.sign-up style="width: 500px; margin: 0 auto;"
+  = form_for @account ,:html => {:class =>"account_form"} do |f|
+    fieldset
+      legend Create Account
+      - if @account.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
+          ul
+            - @account.errors.full_messages.each do |message|
+              li = message
 
-    .field
-      = f.label :first_name
-      = f.text_field :first_name  ,:placeholder => "First Name" , :autofocus => ''
-    .field
-      = f.label :last_name
-      = f.text_field :last_name  ,:placeholder => "Last Name" , :autofocus => ''
-    .field
-      = f.label :user_name
-      = f.text_field :user_name  ,:placeholder => "User Name" , :autofocus => ''
-    .field
-      = f.label :age
-      = f.number_field :age  ,:placeholder => "years"
+      .field
+        = f.label :first_name
+        = f.text_field :first_name  ,:placeholder => "First Name" , :autofocus => ''
 
-    .field
-      = f.label :email
-      = f.text_field :email, :placeholder => "Email"
+      .field
+        = f.label :last_name
+        = f.text_field :last_name  ,:placeholder => "Last Name" , :autofocus => ''
 
-    .field
-      = f.label :password
-      = f.password_field :password, :placeholder => "Password"
+      .field
+        = f.label :user_name
+        = f.text_field :user_name  ,:placeholder => "User Name" , :autofocus => ''
 
-    .field
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation, :placeholder => "Password Confirmation"
+      .field
+        = f.label :age
+        = f.number_field :age  ,:placeholder => "years"
 
-    div align="center"
-      .actions = f.submit 'Save'
+      .field
+        = f.label :description
+        = f.text_field :description  ,:placeholder => "Enter something nice about yourself!"
+
+      .field
+        = f.label :email
+        = f.text_field :email, :placeholder => "Email"
+
+      .field
+        = f.label :password
+        = f.password_field :password, :placeholder => "Password"
+
+      .field
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, :placeholder => "Password Confirmation"
+
+      .field
+        = f.label :looking_for
+        = f.select_tag "looking for", options_from_collection_for_select([], "female", "other")
+
+      div align="center"
+        .actions = f.submit 'Save'
 

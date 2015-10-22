@@ -1,4 +1,4 @@
-table
+table style="margin: 0 auto;"
   tr
     th Image
     th First Name
@@ -7,7 +7,7 @@ table
     th Description
     th Age
   - @threads.each do |thread|
-    tr
+    tr style="outline: 2px solid #000000"
       td
         a href="messages/#{thread.id}/"
           img src="#{thread.profile_image}" style="width:50px;height:50px;"
@@ -16,3 +16,5 @@ table
       td = thread.gender
       td = thread.description
       td = thread.age
+      td
+        a href="messages/#{thread.id}" Message Them

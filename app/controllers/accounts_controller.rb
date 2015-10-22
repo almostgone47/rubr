@@ -12,6 +12,7 @@ class AccountsController < ApplicationController
         first_name: account_params[:first_name],
         last_name: account_params[:last_name],
         user_name: account_params[:user_name],
+        description: account_params[:description],
         age: account_params[:age],
         email: account_params[:email],
         password: account_params[:password]
