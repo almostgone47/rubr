@@ -52,6 +52,6 @@ Warning: Due to fake accounts taking random images from Imgur, sometimes the pic
 
 ## Starting
 - python lib/cleverbot_api/main.py
-- puma -b tcp://192.168.1.5 -p 8080
+- puma -p 8080
 - rake keep_responding_to_messages
 - rake trickle_new_accounts
