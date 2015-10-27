@@ -1,5 +1,9 @@
 # Rubr
 
+Rubr is a Tinder "clone" written in Ruby using Rails. It uses fake accounts to demonstrate its functionality.
+
+Warning: Due to fake accounts taking random images from Imgur, sometimes the pictures won't be work appropriate. You have been warned.
+
 ## Requirements
 - Ruby - ruby-2.2.1
 - RVM - 1.26.2
@@ -8,7 +12,9 @@
 - VirtualBox - 4.3.18
 - Bundler
 
-## Installation
+# Installation
+
+## Setting up VirtualBox
 - `vagrant up`
 - `vagrant ssh`
 - `command curl -sSL https://rvm.io/mpapis.asc | sudo gpg2 --import -`
@@ -38,3 +44,14 @@
 - `create database rubr_development;`
   - hit ctrl + D twice
 - `rake db:migrate`
+- `rake create_fake_accounts[50]`
+
+## Setting up Python
+- Making this later. Essentially you need to install Pip, and then `pip install cleverbot` so you can run `lib/cleverbot_api/main.py`
+
+
+## Starting
+- python lib/cleverbot_api/main.py
+- puma -b tcp://192.168.1.5 -p 8080
+- rake keep_responding_to_messages
+- rake trickle_new_accounts
