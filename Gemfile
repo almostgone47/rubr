@@ -13,6 +13,8 @@ gem 'httpclient'
 gem 'slim-rails'
 gem "unirest"
 gem "quiet_assets"
+gem 'execjs'
+gem 'therubyracer', :platforms => :ruby
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
