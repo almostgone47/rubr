@@ -14,6 +14,7 @@ class Account < ActiveRecord::Base
   validates_numericality_of :age, only_integer: true,
                                   greater_than: 17,
                                   less_than: 100
+  validates_format_of :zip, :with => /^\d{5}(-\d{4})?$/, :message => "Zip should be in the form 12345 or 12345-1234"
 
   def full_name
     "#{first_name} #{last_name}"
