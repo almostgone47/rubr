@@ -38,16 +38,16 @@ module FakeAccountService
 
       # Randomly choose first name based on gender
       choose_name_from = (gender == "male" ? male_names : female_names)
-      first_name = choose_name_from.sample.capitalize
+      first_name = choose_name_from.sample.capitalize.gsub("\r", "")
 
-      last_name = last_names.sample.capitalize
+      last_name = last_names.sample.capitalize.gsub("\r", "")
       zip = "68502"
 
       # Random descriptions
       only_have_rand = rand(1..15)
-      noun = nouns.sample
-      verb = verbs.sample
-      adjective = adjectives.sample
+      noun = nouns.sample.gsub("\r", "")
+      verb = verbs.sample.gsub("\r", "")
+      adjective = adjectives.sample.gsub("\r", "")
       rand_descriptions = [
         "I #{["like", "love", "hate"].sample} #{noun.pluralize}",
         "I have #{rand(2..15)} #{noun.pluralize}",
@@ -87,8 +87,8 @@ module FakeAccountService
       profile_picture = Helpers::get_profile_image
 
 
-      noun = nouns.sample
-      adjective = adjectives.sample
+      noun = nouns.sample.gsub("\r", "")
+      adjective = adjectives.sample.gsub("\r", "")
       puts "Creating #{first_name} #{last_name} with description '#{description}' and profile_picture #{profile_picture}"
       Account.create!(
         first_name: first_name,
