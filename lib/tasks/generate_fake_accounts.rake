@@ -30,7 +30,10 @@ task :generate_fake_accounts, [:amount] => :environment do |t, args|
 
   amount.times do |i|
     total_accounts = Account.count
-    gender = ["m", "f"].sample
+    gender = ["male", "female"].sample
+
+    looking_for = ["male", "female"].delete(gender)
+    looking_for = looking_for[0]
 
     # Randomly choose first name based on gender
     choose_name_from = (gender == "m" ? male_names : female_names)
@@ -90,6 +93,7 @@ task :generate_fake_accounts, [:amount] => :environment do |t, args|
       first_name: first_name,
       last_name: last_name,
       gender: gender,
+      looking_for: looking_for,
       zip: zip,
       description: description,
       age: age,
@@ -103,7 +107,7 @@ task :generate_fake_accounts, [:amount] => :environment do |t, args|
   sleep 1
 
 
-  # TODO: add lookingfor, :orientation
+  # TODO: add orientation
 
   end
 
