@@ -121,10 +121,16 @@ task :trickle_new_accounts, [:amount] => :environment do |t, args|
     ActiveRecord::Base.logger = Logger.new(STDOUT)
 
     def get_profile_image
-      http = HTTPClient.new
-      random_uri = http.get("http://imgur.com/random", :follow_redirect => true)
-      uri = random_uri.header.request_uri.request_uri.gsub("/gallery/", "")
-      return "http://i.imgur.com/#{uri}.jpg"
+      begin
+        http = HTTPClient.new
+        random_uri = http.get("http://imgur.com/random", :follow_redirect => true)
+        uri = random_uri.header.request_uri.request_uri.gsub("/gallery/", "")
+        return "http://i.imgur.com/#{uri}.jpg"
+      rescue => e
+        puts "Received an arror when trying to get a random image!"
+        puts e.inspect
+        return "http://i.imgur.com/774CSj2.png"
+      end
     end
 
 
