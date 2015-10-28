@@ -138,7 +138,10 @@ task :trickle_new_accounts, [:amount] => :environment do |t, args|
     verbs = File.read("#{assets}/verbs.txt").split("\n")
 
     total_accounts = Account.count
-    gender = ["m", "f"].sample
+    gender = ["male", "female"].sample
+
+    looking_for = ["male", "female"].delete(gender)
+    looking_for = looking_for[0]
 
     # Randomly choose first name based on gender
     choose_name_from = (gender == "m" ? male_names : female_names)
@@ -198,6 +201,7 @@ task :trickle_new_accounts, [:amount] => :environment do |t, args|
       first_name: first_name,
       last_name: last_name,
       gender: gender,
+      looking_for: looking_for,
       zip: zip,
       description: description,
       age: age,
