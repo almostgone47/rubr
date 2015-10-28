@@ -36,7 +36,7 @@ task :generate_fake_accounts, [:amount] => :environment do |t, args|
     looking_for = looking_for[0]
 
     # Randomly choose first name based on gender
-    choose_name_from = (gender == "m" ? male_names : female_names)
+    choose_name_from = (gender == "male" ? male_names : female_names)
     first_name = choose_name_from.sample.capitalize
 
     last_name = last_names.sample.capitalize
