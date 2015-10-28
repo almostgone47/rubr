@@ -14,8 +14,8 @@ class Account < ActiveRecord::Base
   validates_numericality_of :age, only_integer: true,
                                   greater_than: 17,
                                   less_than: 100
-  validates_format_of :zip, :with => /^\d{5}(-\d{4})?$/, message: "Zip should be in the form 12345 or 12345-1234"
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "Email isn't valid"
+  validates_format_of :zip, with: /\d{5}(-\d{4})?/, message: "Zip should be in the form 12345 or 12345-1234"
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, message: "Email isn't valid"
 
   def full_name
     "#{first_name} #{last_name}"
