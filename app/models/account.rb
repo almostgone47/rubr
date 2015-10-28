@@ -10,7 +10,7 @@ class Account < ActiveRecord::Base
   before_create { generate_token(:auth_token) }
 
   validates_presence_of :email, :first_name, :last_name, :zip, :looking_for, :gender, :age
-  validates :user_name, uniqueness: { case_sensitive: false }, length: { maximum: 16 }
+  validates :user_name, uniqueness: { case_sensitive: false }, length: { maximum: 24 }
   validates_numericality_of :age, only_integer: true,
                                   greater_than: 17,
                                   less_than: 100
