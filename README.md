@@ -48,7 +48,7 @@ Warning: Due to fake accounts taking random images from Imgur, sometimes the pic
 
 ## Setting up Python
 - sudo yum install python-pip
-- pip install cleverbot
+- sudo pip install cleverbot
 - (You can install virtualenv and all of that if you're really motivated. I wasn't.)
 
 
