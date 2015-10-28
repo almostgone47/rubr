@@ -68,6 +68,12 @@ class PagesController < ApplicationController
   def get_people
     rated_ids = current_account.ratings.pluck(:id)
     rated_ids.push(current_account.id)
+
+    looking_for = current_account.looking_for
+    if looking_for == "any"
+      looking_for = ["male", "female"]
+    end
+
     people = Account.where(gender: current_account.looking_for).not(id: rated_ids).to_a
 
     respond_to do |format|
