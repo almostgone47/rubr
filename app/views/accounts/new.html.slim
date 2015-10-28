@@ -22,6 +22,10 @@ div.sign-up style="width: 500px; margin: 0 auto;"
         = f.text_field :user_name  ,:placeholder => "User Name" , :autofocus => ''
 
       .field
+        = f.lable :zip
+        = f.text_field :zip, :placeholder => "Zip"
+
+      .field
         = f.label :age
         = f.number_field :age  ,:placeholder => "years"
 
