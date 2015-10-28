@@ -77,8 +77,6 @@ class PagesController < ApplicationController
       looking_for = ["male", "female"]
     end
 
-    # TODO: better way to do this? Maybe generate a list of all ids and exclude rated_ids?
-    # I'll have to look at the sql to see if this does 1 or 2 queries
     people = Account.where(gender: current_account.looking_for).where.not(id: rated_ids).to_a
 
     puts "Retrieved #{people.count} people"
