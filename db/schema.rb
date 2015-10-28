@@ -37,11 +37,11 @@ ActiveRecord::Schema.define(version: 20151011100712) do
     t.datetime "last_active"
     t.integer  "like_tokens",     default: 25
     t.string   "looking_for"
-    t.string   "orientation"
     t.string   "gender"
-    t.string   "profile_image",   default: "http://i.imgur.com/774CSj2.png"
     t.integer  "age",             default: 18
     t.boolean  "fake_account",    default: false
+    t.string   "orientation"
+    t.string   "profile_image",   default: "http://i.imgur.com/774CSj2.png"
   end
 
   create_table "messages", force: :cascade do |t|

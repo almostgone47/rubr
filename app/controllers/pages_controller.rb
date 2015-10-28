@@ -66,6 +66,9 @@ class PagesController < ApplicationController
 
   # Get all unrated people (API call from dashboard)
   def get_people
+    puts "-----------"
+    puts "Request for people by user #{current_account.id}"
+
     rated_ids = current_account.ratings.pluck(:id)
     rated_ids.push(current_account.id)
 
@@ -74,10 +77,8 @@ class PagesController < ApplicationController
       looking_for = ["male", "female"]
     end
 
-    people = Account.where(gender: current_account.looking_for).not(id: rated_ids).to_a
+    people = Account.where(gender: current_account.looking_for).where.not(id: rated_ids).to_a
 
-    puts "-----------"
-    puts "Request for people by user #{current_account.id}"
     puts "Retrieved #{people.count} people"
     puts "-----------"
 

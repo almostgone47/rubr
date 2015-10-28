@@ -69,6 +69,16 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
           $(".btn.like-button").hide();
           $(".btn.dislike-button").hide();
         }
+      }, failure: function(data) {
+        $(".status-tag").show();
+        $(".status-tag").html("Something went wrong when trying to find some people for you. Developers have been alerted.");
+        $(".profile-picture-link").hide();
+        $(".profile-picture").hide();
+        $(".person-name").hide();
+        $(".person-age").hide();
+        $(".person-description").hide();
+        $(".btn.like-button").hide();
+        $(".btn.dislike-button").hide();
       }, dataType: "json"});
     }
 
