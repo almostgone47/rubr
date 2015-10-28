@@ -12,7 +12,7 @@ class Account < ActiveRecord::Base
   validates_presence_of :email, :first_name, :last_name, :zip, :looking_for, :gender, :age
   validates :user_name, uniqueness: { case_sensitive: false }
   validates_numericality_of :age, only_integer: true,
-                                  greater_than: 18,
+                                  greater_than: 17,
                                   less_than: 100
 
   def full_name
