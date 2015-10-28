@@ -76,6 +76,11 @@ class PagesController < ApplicationController
 
     people = Account.where(gender: current_account.looking_for).not(id: rated_ids).to_a
 
+    puts "-----------"
+    puts "Request for people by user #{current_account.id}"
+    puts "Retrieved #{people.count} people"
+    puts "-----------"
+
     respond_to do |format|
       format.json { render json: people}
     end
