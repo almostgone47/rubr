@@ -3,8 +3,9 @@ task :respond_to_messages => :environment do |t|
   puts "Beginning to respond to messages"
   total_responses = 0
 
+  real_accounts = Account.where(fake_account: false)
   Account.where(fake_account: true).find_each do |bot|
-    Account.where(fake_account: false).find_each do |real|
+    real_accounts.find_each do |real|
       messages = bot.messages_with real
       last = messages.last
       if last
