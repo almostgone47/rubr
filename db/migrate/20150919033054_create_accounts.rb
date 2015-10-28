@@ -29,18 +29,17 @@ class CreateAccounts < ActiveRecord::Migration
       # eg: "male|female|robot" with extra genders and all that included.
       # It could also be an array, probably easier.
       t.string      :looking_for
+      t.string      :gender
+      t.integer     :age,             default: 18
+      t.boolean     :fake_account,    default: false
 
       # Simply info to put on their profile, we won't make queries based off of these fields.
       # TODO: make sure this is a good idea
       # TODO: check privilege
       t.string      :orientation
-      t.string      :gender
 
       t.string      :profile_image,   default: "http://i.imgur.com/774CSj2.png"
 
-      t.integer     :age,             default: 18
-
-      t.boolean     :fake_account,    default: false
     end
 
     create_table "rating_connections", :force => true do |t|

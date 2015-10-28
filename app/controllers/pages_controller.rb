@@ -68,10 +68,10 @@ class PagesController < ApplicationController
   def get_people
     rated_ids = current_account.ratings.pluck(:id)
     rated_ids.push(current_account.id)
-    array = Account.where.not(id: rated_ids).to_a
+    people = Account.where(gender: current_account.looking_for).not(id: rated_ids).to_a
 
     respond_to do |format|
-      format.json { render json: array}
+      format.json { render json: people}
     end
   end
 end

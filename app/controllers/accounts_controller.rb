@@ -14,6 +14,8 @@ class AccountsController < ApplicationController
         user_name: account_params[:user_name],
         description: account_params[:description],
         age: account_params[:age],
+        gender: account_params[:gender],
+        looking_for: account_params[:looking_for],
         email: account_params[:email],
         password: account_params[:password]
       )

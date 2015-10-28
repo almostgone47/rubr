@@ -9,9 +9,11 @@ class Account < ActiveRecord::Base
   # TODO: has_and_belongs_to_many accounts for matches
   before_create { generate_token(:auth_token) }
 
- # validates_uniqueness_of :email, case_sensitive: false
-  validates_presence_of :email
-  validates_presence_of :first_name, :last_name
+  validates_presence_of :email, :first_name, :last_name, :zip, :looking_for, :gender, :age
+  validates :user_name, uniqueness: { case_sensitive: false }
+  validates_numericality_of :age, only_integer: true,
+                                  greater_than: 18,
+                                  less_than: 100
 
   def full_name
     "#{first_name} #{last_name}"
