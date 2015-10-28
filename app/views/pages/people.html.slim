@@ -4,7 +4,7 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
   div.picture-holder style="width:500px; margin:0 auto;outline: #000000 solid thick;"
     a.profile-picture-link href=""
       img.profile-picture style="width: 500px;height: 500px" src = ""
-  p.person-name
+  p.person-user_name
   p.person-age
   p.person-description
   a.btn.like-button href="#like" data-person_id=1 Like
@@ -23,7 +23,7 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
         $(".status-tag").html("Looking for more matches..")
         $(".profile-picture-link").hide();
         $(".profile-picture").hide();
-        $(".person-name").hide();
+        $(".person-user_name").hide();
         $(".person-age").hide();
         $(".person-description").hide();
         $(".btn.like-button").hide();
@@ -34,7 +34,7 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
         person = people[counter]
         $(".profile-picture-link").show();
         $(".profile-picture").show();
-        $(".person-name").show();
+        $(".person-user_name").show();
         $(".person-age").show();
         $(".person-description").show();
         $(".btn.like-button").show();
@@ -42,7 +42,7 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
 
         $(".profile-picture-link").attr('href', person.profile_image);
         $(".profile-picture").attr('src', person.profile_image);
-        $(".person-name").html(person.first_name+" "+person.last_name);
+        $(".person-user_name").html(person.user_name);
         $(".person-age").html(person.age);
         $(".person-description").html(person.description);
         $(".btn.like-button").attr("data-person_id", person.id)
@@ -63,18 +63,18 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
           $(".status-tag").html("Unable to find anyone else near you. Sorry about that!");
           $(".profile-picture-link").hide();
           $(".profile-picture").hide();
-          $(".person-name").hide();
+          $(".person-user_name").hide();
           $(".person-age").hide();
           $(".person-description").hide();
           $(".btn.like-button").hide();
           $(".btn.dislike-button").hide();
         }
-      }, failure: function(data) {
+      }, error: function(data) {
         $(".status-tag").show();
         $(".status-tag").html("Something went wrong when trying to find some people for you. Developers have been alerted.");
         $(".profile-picture-link").hide();
         $(".profile-picture").hide();
-        $(".person-name").hide();
+        $(".person-user_name").hide();
         $(".person-age").hide();
         $(".person-description").hide();
         $(".btn.like-button").hide();
