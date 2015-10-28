@@ -47,7 +47,9 @@ Warning: Due to fake accounts taking random images from Imgur, sometimes the pic
 - `rake create_fake_accounts[50]`
 
 ## Setting up Python
-- Making this later. Essentially you need to install Pip, and then `pip install cleverbot` so you can run `lib/cleverbot_api/main.py`
+- sudo yum install python-pip
+- pip install cleverbot
+- (You can install virtualenv and all of that if you're really motivated. I wasn't.)
 
 
 ## Starting
