@@ -33,7 +33,8 @@ module FakeAccountService
       total_accounts = Account.count
       gender = ["male", "female"].sample
 
-      looking_for = ["male", "female"].delete(gender)
+      looking_for = ["male", "female"]
+      looking_for.delete(gender)
       looking_for = looking_for[0]
 
       # Randomly choose first name based on gender
