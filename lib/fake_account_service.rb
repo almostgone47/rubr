@@ -87,8 +87,20 @@ module FakeAccountService
       profile_picture = Helpers::get_profile_image
 
 
+
+      # TODO: is there a better way to do this?
       noun = nouns.sample.gsub("\r", "")
       adjective = adjectives.sample.gsub("\r", "")
+      rand_username = "#{adjective}#{noun}#{total_accounts+i}"
+      tries = 1
+      while rand_username.length > 24
+        noun = nouns.sample.gsub("\r", "")
+        adjective = adjectives.sample.gsub("\r", "")
+        rand_username = "#{adjective}#{noun}#{total_accounts+i}"
+        tries += 1
+      end
+      puts "Took #{tries} tries to generate a username"
+
       puts "Creating #{first_name} #{last_name} with description '#{description}' and profile_picture #{profile_picture}"
       Account.create!(
         first_name: first_name,
