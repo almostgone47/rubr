@@ -89,12 +89,9 @@ module FakeAccountService
 
 
 
-      # TODO: is there a better way to do this?
-      noun = nouns.sample.gsub("\r", "")
-      adjective = adjectives.sample.gsub("\r", "")
-      rand_username = "#{adjective}#{noun}#{total_accounts+i}"
       tries = 1
-      while rand_username.length > 24
+      rand_username = nil
+      while rand_username == nil || rand_username.length > 24
         noun = nouns.sample.gsub("\r", "")
         adjective = adjectives.sample.gsub("\r", "")
         rand_username = "#{adjective}#{noun}#{total_accounts+i}"
@@ -113,7 +110,7 @@ module FakeAccountService
         age: age,
         profile_image: profile_picture,
         password: "password",
-        user_name: "#{adjective}#{noun}#{total_accounts+i}",
+        user_name: rand_username,
         email: "sturgeonb4@gmail.com",
         fake_account: true
       )
