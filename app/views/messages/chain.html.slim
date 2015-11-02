@@ -28,8 +28,7 @@ div.send-message style="width: 500px;margin: 0 auto;"
 = content_for :footer do
   javascript:
     var receiver_id = window.location.pathname.substr(1).split('/')[1]
-    var request_url = receiver_id + "/get_chain"
-    var request_url = "/get_chain"
+    var request_url = "/messages/"+receiver_id+"/get_chain"
 
     console.log(receiver_id)
     console.log(request_url)
