@@ -19,7 +19,28 @@ class MessagesController < ApplicationController
       #TODO what do here
       @messages = []
     end
+  end
 
+  # API call
+  def get_chain
+    begin
+      messages_with = Account.where(id: params[:id]).first
+      if messages_with
+        messages = current_account.messages_with messages_with
+      else
+        #TODO what do here
+        messages = []
+      end
+
+      respond_to do |format|
+        format.json { render json: messages }
+      end
+
+    rescue => e
+      puts "Error getting messages"
+      puts e.inspect
+      render :status => 500
+    end
   end
 
   # API call

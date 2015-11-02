@@ -1,7 +1,7 @@
 div.chain-holder style="height: 600px;width: 500px;border: 1px black solid; margin:0 auto;"
   div.scrollable-content style="height: 580px;overflow: auto;background-color: white;"
     -cur_account_id = current_account.id
-    ul.message-list
+    ul.message-list data-value="#{current_account.id}"
       - @messages.each do |message|
         - if message.sender_id == cur_account_id
           li
@@ -24,4 +24,54 @@ div.send-message style="width: 500px;margin: 0 auto;"
 
       div align="center"
         .actions = f.submit 'Send'
+
+= content_for :footer do
+  javascript:
+    var receiver_id = window.location.pathname.substr(1).split('/')[1]
+    var request_url = "get_chain"
+
+    console.log(receiver_id)
+    console.log(request_url)
+
+    function updateMessages(messages) {
+      var current_id = $(".message-list").data()
+      $(".message-list").innerHTML = "";
+      for (message in messages) {
+        if (message.sender_id === current_id) {
+          message_body = "["+message.sent_at+"] You: "+ message.body
+          message_color = "blue"
+        }
+        else {
+          message_body = "["+message.sent_at+"] Them: "+ message.body
+          message_color = "red"
+        }
+
+        $(".message-list").add("li").add("<p>"+message_body+"</p>").css("color", message_color)
+
+      }
+    }
+
+
+    function getChain() {
+      $.ajax({ url: request_url, data: $(this).data(), success: function(data) {
+        if (data.length > 0) {
+          messages = data
+          console.log("Getting chain..")
+          updateMessages(messages)
+        }
+        else {
+          console.log("No Messages")
+        }
+    },
+    error: function(data) {
+      console.log("Error getting Messages")
+      clearTimeout(chainTimer)
+    }
+    })
+    }
+
+    getChain();
+
+    chainTimer = setTimeout(getChain, 500);
+
 

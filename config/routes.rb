@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   post "send_message", to: "messages#send_message"
   get "messages", to: "messages#index"
   get "messages/:id/", to: "messages#chain"
+  get "messages/:id/get_chain", to: "messages#get_chain"
 
   resources :accounts
   resources :messages
