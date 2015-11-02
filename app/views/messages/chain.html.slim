@@ -35,7 +35,7 @@ div.send-message style="width: 500px;margin: 0 auto;"
 
     function updateMessages(messages) {
       var current_id = $(".message-list").data()
-      $(".message-list").innerHTML = "";
+      $("ul").empty();
       for (message in messages) {
         message = messages[message]
         console.log(message.body)
@@ -48,7 +48,7 @@ div.send-message style="width: 500px;margin: 0 auto;"
           message_color = "red"
         }
 
-        $(".message-list").add("li").add("<p>"+message_body+"</p>").css("color", message_color)
+        $("ul").add("li").add("<p>"+message_body+"</p>").css("color", message_color)
 
       }
     }
