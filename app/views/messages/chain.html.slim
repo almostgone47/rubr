@@ -65,13 +65,11 @@ div.send-message style="width: 500px;margin: 0 auto;"
     },
     error: function(data) {
       console.log("Error getting Messages")
-      clearTimeout(chainTimer)
+      clearInterval(chainTimer)
     }
     })
     }
 
     getChain();
 
-    chainTimer = setTimeout(getChain, 500);
-
-
+    chainTimer = setInterval(getChain, 2000);
