@@ -28,7 +28,7 @@ div.send-message style="width: 500px;margin: 0 auto;"
 = content_for :footer do
   javascript:
     var receiver_id = window.location.pathname.substr(1).split('/')[1]
-    var request_url = "get_chain"
+    var request_url = receiver_id + "/get_chain"
 
     console.log(receiver_id)
     console.log(request_url)
@@ -37,6 +37,8 @@ div.send-message style="width: 500px;margin: 0 auto;"
       var current_id = $(".message-list").data()
       $(".message-list").innerHTML = "";
       for (message in messages) {
+        message = messages[message]
+        console.log(message.body)
         if (message.sender_id === current_id) {
           message_body = "["+message.sent_at+"] You: "+ message.body
           message_color = "blue"

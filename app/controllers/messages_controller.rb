@@ -32,8 +32,10 @@ class MessagesController < ApplicationController
         messages = []
       end
 
+      puts "Messages:"
+      puts messages.to_a
       respond_to do |format|
-        format.json { render json: messages }
+        format.json { render json: messages.to_a }
       end
 
     rescue => e
