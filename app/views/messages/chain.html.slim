@@ -38,7 +38,9 @@ div.send-message style="width: 500px;margin: 0 auto;"
       $("ul").empty();
       for (message in messages) {
         message = messages[message]
-        console.log(message.body)
+        console.log(current_id)
+        console.log(message.sender_id)
+        console.log("")
         if (message.sender_id === current_id) {
           message_body = "["+message.sent_at+"] You: "+ message.body
           message_color = "blue"
