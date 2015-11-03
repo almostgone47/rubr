@@ -15,6 +15,7 @@ gem "unirest"
 gem "quiet_assets"
 gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
+gem 'rspec-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'

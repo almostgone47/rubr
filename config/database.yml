@@ -5,3 +5,12 @@ development:
   pool: 5
   username:
   password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: rubr_test
+  pool: 5
+  username:
+  password:
+

@@ -42,6 +42,7 @@ Warning: Due to fake accounts taking random images from Imgur, sometimes the pic
   - hit enter to leave the password blank
 - `psql`
 - `create database rubr_development;`
+- `create database rubr_test;`
   - hit ctrl + D twice
 - `rake db:migrate`
 - `rake create_fake_accounts[50]`
