@@ -6,7 +6,18 @@ class AccountsController < ApplicationController
   end
 
   def create
-    account_params = params[:account]
+
+    # Sanitizing user input, excludes email and password
+    raw_account_params = params[:account]
+    account_params = {}
+    raw_account_params.each do |key, value|
+      if key == :password || key == :email
+        account_params[key] = value
+      else
+        account_params[key] = value.sanitize
+      end
+    end
+
     if account_params[:password] == account_params[:password_confirmation]
       a = Account.new(
         first_name: account_params[:first_name],
