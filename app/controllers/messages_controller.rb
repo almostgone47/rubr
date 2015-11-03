@@ -49,7 +49,7 @@ class MessagesController < ApplicationController
     message_params = params[:message]
     status = 200
     send_to = Account.where(id: message_params[:receiver_id]).first
-    message_body = ActionController::Base.helpers.sanitize(message_params[:body])
+    message_body = message_params[:body].sanitize
 
     if send_to
       #if current_account.is_matched? send_to

@@ -6,7 +6,7 @@ task :sanitize_messages => :environment do |t|
   Message.all.find_each do |message|
     puts "Sanitizing message #{message.id}"
     puts "Before: #{message.body}"
-    sanitized_message = ActionController::Base.helpers.sanitize(message.body)
+    sanitized_message = message.body.sanitize
     puts "After: #{sanitized_message}"
     message.update(body: sanitized_message)
   end
