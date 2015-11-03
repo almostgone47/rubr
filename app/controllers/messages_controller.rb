@@ -32,8 +32,6 @@ class MessagesController < ApplicationController
         messages = []
       end
 
-      puts "Messages:"
-      puts messages.to_a
       respond_to do |format|
         format.json { render json: messages.to_a }
       end
@@ -48,11 +46,10 @@ class MessagesController < ApplicationController
   # API call
   # TODO: rework this part
   def create
-    puts params.inspect
     message_params = params[:message]
     status = 200
     send_to = Account.where(id: message_params[:receiver_id]).first
-    message_body = message_params[:body]
+    message_body = ActionController::Base.helpers.sanitize(message_params[:body])
 
     if send_to
       #if current_account.is_matched? send_to
