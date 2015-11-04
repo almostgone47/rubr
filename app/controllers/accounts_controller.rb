@@ -11,12 +11,15 @@ class AccountsController < ApplicationController
     raw_account_params = params[:account]
     account_params = {}
     raw_account_params.each do |key, value|
+      key = key.to_sym
       if key == :password || key == :email
         account_params[key] = value
       else
         account_params[key] = value.sanitize
       end
     end
+
+    puts account_params.inspect
 
     if account_params[:password] == account_params[:password_confirmation]
       a = Account.new(
