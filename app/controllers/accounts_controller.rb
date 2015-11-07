@@ -6,6 +6,10 @@ class AccountsController < ApplicationController
   end
 
   def create
+    # TODO: @account needs to be valid here
+    puts "Created account: ------------"
+    puts @account.inspect
+    puts "End Created account: ----------"
 
     # Sanitizing user input, excludes email and password
     raw_account_params = params[:account]
