@@ -12,7 +12,8 @@ class AccountsController < ApplicationController
     account_params = {}
     raw_account_params.each do |key, value|
       key = key.to_sym
-      if key == :password || key == :email
+      #if key == :password || key == :email
+      if [:password, :email].include?(key)
         account_params[key] = value
       else
         account_params[key] = value.sanitize
@@ -41,6 +42,7 @@ class AccountsController < ApplicationController
       else
         #TODO: get this part working
         puts a.errors.inspect
+        @account = Account.new
         return render action: 'new'
       end
     end
