@@ -36,6 +36,7 @@ desc "Constantly check and respond to messages"
 task :keep_responding_to_messages => :environment do |t|
   checking = true
 
+  # TODO: optimize this
   while checking == true
     Account.where(fake_account: true).find_each do |bot|
       Account.where(fake_account: false).find_each do |real|
