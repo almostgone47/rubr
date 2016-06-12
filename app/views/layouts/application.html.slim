@@ -5,6 +5,7 @@ html.no-js
     meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no"
     = stylesheet_link_tag "application", media: "all"
     = stylesheet_link_tag "//fonts.googleapis.com/css?family=Raleway:400,300"
+    = stylesheet_link_tag "//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css"
     = yield :head
     = csrf_meta_tags
   body
@@ -14,12 +15,14 @@ html.no-js
         div.header
           /img.header-logo src="http://i.imgur.com/3uRYIcO.png"
           ul.topnav
-            li
+            li.header-profile
               a href="/profile" Profile
-            li
-              a href="/people" Find People
-            li
-              a href="/messages" Messages
+            li.header-find-matches
+              a href="/people" Find Matches
+            li.header-messages
+              a href="/messages"
+                | Messages 
+                i.mail-alert.fa.fa-envelope style="display: none;"
             li.icon
               a href="javascript:void(0);" onclick="navFunction()" &#9776
         .main-content

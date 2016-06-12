@@ -1,47 +1,46 @@
-div.account_form_container
-  = form_for @account ,:html => {:class =>"account_form"} do |f|
-    fieldset
-      legend Edit Account
-      - if @account.errors.any?
-        #error_explanation
-          h2 = "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
-          ul
-            - @account.errors.full_messages.each do |message|
-              li = message
+div.form style="text-align: left;"
+    div.account_form_container
+      h3 style="text-align: center;" = "Editing profile for: #{@account.user_name}"
+      = form_for @account ,:html => {:class =>"account_form"} do |f|
+        fieldset
+          - if @account.errors.any?
+            #error_explanation
+              h2 = "#{pluralize(@account.errors.count, "error")} prohibited this account from being saved:"
+              ul
+                - @account.errors.full_messages.each do |message|
+                  li = message
 
-      .field
-        = f.label :first_name
-        = f.text_field :first_name  ,:value => @account.first_name , :autofocus => ''
+          .field
+            = f.label :first_name
+            = f.text_field :first_name  ,:value => @account.first_name , :autofocus => ''
 
-      .field
-        = f.label :last_name
-        = f.text_field :last_name  ,:placeholder => "Last Name" , :autofocus => ''
+          .field
+            = f.label :last_name
+            = f.text_field :last_name  ,:placeholder => "Last Name" , :autofocus => ''
 
-      .field
-        = f.label :zip
-        = f.text_field :zip, :placeholder => "Zip"
+          .field
+            = f.label :zip
+            = f.text_field :zip, :placeholder => "Zip"
 
-      .field
-        = f.label :age
-        = f.number_field :age  ,:placeholder => "years"
+          .field
+            = f.label :age
+            = f.number_field :age  ,:placeholder => "years"
 
-      .field
-        = f.label :description
-        br
-        = f.text_area :description  ,:placeholder => "Enter something nice about yourself!", :style => "width: 100%;height: 100px;"
+          .field
+            = f.label :description
+            br
+            = f.text_area :description  ,:placeholder => "Enter something nice about yourself!", :style => "width: 100%;height: 100px;"
 
-      .field
-        = f.label :email
-        = f.text_field :email, :placeholder => "Email"
+          .field
+            = f.label :email
+            = f.text_field :email, :placeholder => "Email"
 
-      .form-group
-        .col-sm-3
-          = f.label :gender, "Gender"
-          = select_tag "account[gender]", options_for_select([["", ""], ["Male", "male"], ["Female", "female"]], @account.gender), value: @account.gender, required: "required", class: "form-control", autofocus: "autofocus"
+          .form-group.spacer
+              = f.label :gender, "Gender: "
+              = select_tag "account[gender]", options_for_select([["", ""], ["Male", "male"], ["Female", "female"]], @account.gender), value: @account.gender, required: "required", class: "form-control", autofocus: "autofocus"
 
-      .form-group
-        .col-sm-3
-          = f.label :looking_for, "Looking For"
-          = select_tag "account[looking_for]", options_for_select([["", ""], ["Male", "male"], ["Female", "female"], ["Any", "any"]], @account.looking_for), value: @account.looking_for, required: "required", class: 'form-control', autofocus: 'autofocus'
-      div align="center"
-        .actions = f.submit 'Save'
+          .form-group.spacer
+              = f.label :looking_for, "Looking For: "
+              = select_tag "account[looking_for]", options_for_select([["", ""], ["Male", "male"], ["Female", "female"], ["Any", "any"]], @account.looking_for), value: @account.looking_for, required: "required", class: 'form-control', autofocus: 'autofocus'
+          div align="center"
+            .actions = f.submit 'Save'

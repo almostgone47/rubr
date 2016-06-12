@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "profile", to: "accounts#show"
   get "profile/edit", to: "accounts#edit"
   post "profile/update", to: "accounts#update"
+  get "profile/check_for_mail", to: "accounts#has_unread_mail"
 
   resources :accounts
   resources :messages

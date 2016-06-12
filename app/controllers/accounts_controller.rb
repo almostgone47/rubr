@@ -66,10 +66,23 @@ class AccountsController < ApplicationController
   def update
     @account = current_account
     if @account.update(trusted_params)
+      flash[:alert] = "Successfully updated profile!"
       redirect_to "/profile"
     else
       return render action: 'edit'
     end
+  end
+
+  # API call
+  # Returns true or false
+  # TODO: maybe have this return # of unread mails
+  # TODO: make this more secure
+  def has_unread_mail
+      unread_mail = Message.where(receiver_id: current_account.id, read: false).count
+      respond_to do |format|
+          format.json { render json: unread_mail > 0 }
+      end
+      return 200
   end
 
   private

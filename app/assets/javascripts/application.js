@@ -18,3 +18,19 @@
 function navFunction() {
     document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
 }
+
+function checkForMail() {
+    $.ajax({
+        type: "GET",
+        url: "/profile/check_for_mail",
+        success: function(data) {
+            if(data == true) {
+                $(".mail-alert").show()
+            }
+        },
+        failure: function(data) {
+            alert("failed to check for mail");
+        }
+    })
+}
+checkForMail()

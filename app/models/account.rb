@@ -104,7 +104,7 @@ class Account < ActiveRecord::Base
     return false
   end
 
-  # TOOD: IT KEEPS GETTING WORSE, WHY DID YOU WRITE
+  # TODO: IT KEEPS GETTING WORSE, WHY DID YOU WRITE
   # MESSAGES LIKE THIS. STOP IT.
   def messages_with account
     if account

@@ -1,8 +1,7 @@
 table.match-table style="margin: 0 auto;"
   tr
     th Image
-    th First Name
-    th Last Name
+    th Username
     th Gender
     th Age
   - @threads.each do |thread|
@@ -10,8 +9,7 @@ table.match-table style="margin: 0 auto;"
       td
         a href="messages/#{thread.id}/"
           img src="#{thread.profile_image}" style="width:50px;height:50px;"
-      td = thread.first_name
-      td = thread.last_name
+      td = thread.user_name
       td = thread.gender
       td = thread.age
       td
