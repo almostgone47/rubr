@@ -34,6 +34,24 @@ class Account < ActiveRecord::Base
     self.ratings.where(rating_type: "dislike")
   end
 
+  def likes_received
+    RatingConnection.where(ratee_id: self.id, rating_type: "like")
+  end
+
+  def likes_given
+    RatingConnection.where(rater_id: self.id, rating_type: "like")
+  end
+
+  # TODO: test this, make it more efficient
+  def matches
+    received = self.likes_received
+    given = self.likes_given
+
+    match_ids = received.where(:rater_id => given.pluck(:ratee_id)).pluck(:rater_id)
+
+    Account.where(:id => match_ids)
+  end
+
   # TODO: test this
   def has_rated? account
     self.ratings.include? account
@@ -74,6 +92,7 @@ class Account < ActiveRecord::Base
     end
   end
 
+  # TODO: Find a better way to find matches. Maybe in 1 DB query
   def is_matched? account
     if account
       if self.ratings.include? account

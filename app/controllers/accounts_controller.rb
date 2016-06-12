@@ -52,4 +52,30 @@ class AccountsController < ApplicationController
     end
   end
 
+  # GET /profile
+  def show
+    @account = current_account
+  end
+
+  # GET /profile/edit
+  def edit
+    @account = current_account
+  end
+
+  # POST /profile/update
+  def update
+    @account = current_account
+    if @account.update(trusted_params)
+      redirect_to "/profile"
+    else
+      return render action: 'edit'
+    end
+  end
+
+  private
+    #TODO: rename this to account_params
+    def trusted_params
+      params.require(:account).permit(:first_name, :last_name, :user_name, :zip, :description, :age, :gender, :looking_for, :email, :password)
+    end
+
 end

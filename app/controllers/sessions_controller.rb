@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
 
   def new
     puts "In Sessions#new"
+    puts "Params: #{params.inspect}"
     if current_account
       puts "Currently in a session"
       puts "Redirecting to people_url: #{people_url}"
@@ -13,6 +14,7 @@ class SessionsController < ApplicationController
 
   def create
     puts "In Sessions#create"
+    puts "Params: #{params.inspect}"
     user_name = params[:user_name]
     account = Account.where(user_name: user_name).first
 

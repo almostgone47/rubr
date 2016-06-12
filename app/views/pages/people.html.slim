@@ -1,14 +1,29 @@
-
-div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
+div.person
   p.status-tag Getting People near you...
-  div.picture-holder style="width:500px; margin:0 auto;outline: #000000 solid thick;"
-    a.profile-picture-link href=""
-      img.profile-picture style="width: 500px;height: 500px" src = ""
-  p.person-user_name
-  p.person-age
-  p.person-description
-  a.btn.like-button href="#like" data-person_id=1 Like
-  a.btn.dislike-button href="#dislike" data-person_id=1 Dislike
+  a.profile-picture-link href=""
+    img.person-profile-picture src = ""
+
+  div.person-info
+    table align="left"
+      tr
+        td.strong Username
+        td
+          p.person-user_name
+      tr
+        td.strong Age
+        td
+          p.person-age
+      tr
+        td.strong Description
+        td
+          p.person-description
+
+  div.rating-button-container
+    a.rating.like-button href="#like" data-person_id=1
+      p Like
+
+    a.rating.dislike-button href="#dislike" data-person_id=1
+      p Dislike
 
 = content_for :footer do
   javascript:
@@ -22,31 +37,33 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
         $(".status-tag").show();
         $(".status-tag").html("Looking for more matches..")
         $(".profile-picture-link").hide();
-        $(".profile-picture").hide();
-        $(".person-user_name").hide();
-        $(".person-age").hide();
-        $(".person-description").hide();
-        $(".btn.like-button").hide();
-        $(".btn.dislike-button").hide();
+        $(".person-profile-picture").hide();
+        $(".person-info").hide()
+        //$(".person-user_name").hide();
+        //$(".person-age").hide();
+        //$(".person-description").hide();
+        $(".rating.like-button").hide();
+        $(".rating.dislike-button").hide();
         getPeople()
       }
       else {
         person = people[counter]
         $(".profile-picture-link").show();
-        $(".profile-picture").show();
-        $(".person-user_name").show();
-        $(".person-age").show();
-        $(".person-description").show();
-        $(".btn.like-button").show();
-        $(".btn.dislike-button").show();
+        $(".person-profile-picture").show();
+        $(".person-info").show()
+        //$(".person-user_name").show();
+        //$(".person-age").show();
+        //$(".person-description").show();
+        $(".rating.like-button").show();
+        $(".rating.dislike-button").show();
 
         $(".profile-picture-link").attr('href', person.profile_image);
-        $(".profile-picture").attr('src', person.profile_image);
+        $(".person-profile-picture").attr('src', person.profile_image);
         $(".person-user_name").html(person.user_name);
         $(".person-age").html(person.age);
         $(".person-description").html(person.description);
-        $(".btn.like-button").attr("data-person_id", person.id)
-        $(".btn.dislike-button").attr("data-person_id", person.id)
+        $(".rating.like-button").attr("data-person_id", person.id)
+        $(".rating.dislike-button").attr("data-person_id", person.id)
       }
     }
 
@@ -61,29 +78,33 @@ div.person style="width:500px; margin:0 auto;outline: #666666 solid thick;"
         else {
           $(".status-tag").show();
           $(".status-tag").html("Unable to find anyone else near you. Sorry about that!");
+          $(".person").attr('style', "background-color: white;")
+          $(".status-tag").attr('style', "text-align: center;")
           $(".profile-picture-link").hide();
-          $(".profile-picture").hide();
-          $(".person-user_name").hide();
-          $(".person-age").hide();
-          $(".person-description").hide();
-          $(".btn.like-button").hide();
-          $(".btn.dislike-button").hide();
+          $(".person-profile-picture").hide();
+          $(".person-info").hide();
+          //$(".person-user_name").hide();
+          //$(".person-age").hide();
+          //$(".person-description").hide();
+          $(".rating.like-button").hide();
+          $(".rating.dislike-button").hide();
         }
       }, error: function(data) {
         $(".status-tag").show();
         $(".status-tag").html("Something went wrong when trying to find some people for you. Developers have been alerted.");
         $(".profile-picture-link").hide();
-        $(".profile-picture").hide();
-        $(".person-user_name").hide();
-        $(".person-age").hide();
-        $(".person-description").hide();
-        $(".btn.like-button").hide();
-        $(".btn.dislike-button").hide();
+        $(".person-profile-picture").hide();
+        $(".person-info").hide();
+        //$(".person-user_name").hide();
+        //$(".person-age").hide();
+        //$(".person-description").hide();
+        $(".rating.like-button").hide();
+        $(".rating.dislike-button").hide();
       }, dataType: "json"});
     }
 
     $("a.like-button").on("click", function(evt) {
-      var rated_person_id = $("a.like-button").attr("data-person_id");
+      var rated_person_id = $("a.rating.like-button").attr("data-person_id");
       $.ajax({ url: "like_person",
               type: "post",
               data: {rated_person_id: rated_person_id},

@@ -1,15 +1,12 @@
-= form_tag sessions_path, :id => "login_form" do
-  .input-group
-    = label_tag :user_name
-      | User Name
-    = text_field_tag :user_name, params[:user_name]
-  .input-group
-    = label_tag :password
-    = password_field_tag :password
-  /.input-group.fade
-    = check_box_tag :remember_me, 1, params[:remember_me]
-    = label_tag :remember_me
-  .actions
-    = submit_tag "Sign In", :class => 'btn btn-primary btn-full'
-br
-a href="/sign_up" Need an account? Sign up
+div.login-page
+  div.form
+    form.login-form action="/sign_in" method="POST"
+      h2 Rubr
+
+      = hidden_field_tag :authenticity_token, form_authenticity_token
+      input type="text" name="user_name" placeholder="username"
+      input type="password" name="password" placeholder="password"
+      button login
+      p.message Not registered?
+      a style="text-decoration: none;" href="/sign_up" Create an account
+

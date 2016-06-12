@@ -1,0 +1,30 @@
+div.account-show style="width: 500px; margin: 0 auto; outline: 10px thin black;"
+    a.btn.text-button href="/profile/edit" style="float: right;"
+      p Edit Profile
+
+    br
+
+    img.profile-picture src="#{@account.profile_image}"
+
+    table.profile_info align="right"
+      tr
+        td.strong Username
+        td = @account.user_name
+      tr
+        td.strong Age
+        td = @account.age
+      tr
+        td.strong Zip
+        td = @account.zip
+      tr
+        td.strong Email
+        td = @account.email
+      tr
+        td.strong Description
+        td = @account.description
+      tr
+        td.strong Gender
+        td = @account.gender
+      tr
+        td.strong Looking For
+        td = @account.looking_for

@@ -14,3 +14,7 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+//
+function navFunction() {
+    document.getElementsByClassName("topnav")[0].classList.toggle("responsive");
+}

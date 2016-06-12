@@ -1,10 +1,9 @@
-table style="margin: 0 auto;"
+table.match-table style="margin: 0 auto;"
   tr
     th Image
     th First Name
     th Last Name
     th Gender
-    th Description
     th Age
   - @threads.each do |thread|
     tr style="outline: 2px solid #000000"
@@ -14,7 +13,6 @@ table style="margin: 0 auto;"
       td = thread.first_name
       td = thread.last_name
       td = thread.gender
-      td = thread.description
       td = thread.age
       td
         a href="messages/#{thread.id}" Message Them

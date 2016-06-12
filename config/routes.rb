@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   #--- Global ---
   get "sign_in", to: "sessions#new"
+  post "sign_in", to: "sessions#create"
   get "sign_out", to: "sessions#destroy"
   get "sign_up", to: "accounts#new"
   post "sign_up", to: "accounts#create"
@@ -21,6 +22,10 @@ Rails.application.routes.draw do
   get "messages", to: "messages#index"
   get "messages/:id/", to: "messages#chain"
   get "messages/:id/get_chain", to: "messages#get_chain"
+
+  get "profile", to: "accounts#show"
+  get "profile/edit", to: "accounts#edit"
+  post "profile/update", to: "accounts#update"
 
   resources :accounts
   resources :messages

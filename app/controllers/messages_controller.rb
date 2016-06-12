@@ -4,9 +4,8 @@ class MessagesController < ApplicationController
     @message = Message.new
   end
 
-  # TODO: makea thing do a thing here
   def index
-    @threads = Account.all
+    @threads = current_account.matches
   end
 
   def chain
