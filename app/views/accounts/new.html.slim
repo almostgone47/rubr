@@ -1,4 +1,4 @@
-div.sign-up style="width: 500px; margin: 0 auto;"
+div.sign-up.form style="margin-top: 25px;"
   = form_for @account ,:html => {:class =>"account_form"} do |f|
     fieldset
       legend Create Account
@@ -45,14 +45,14 @@ div.sign-up style="width: 500px; margin: 0 auto;"
         = f.label :password_confirmation
         = f.password_field :password_confirmation, :placeholder => "Password Confirmation"
 
-      .form-group
+      .form-group.spacer
         = f.label :gender, "Gender"
         .col-sm-3
           = select_tag "account[gender]", options_for_select([["", ""], ["Male", "male"], ["Female", "female"]], @account.gender), value: @account.gender, required: "required", class: "form-control", autofocus: "autofocus"
 
-      .form-group
+      .form-group.spacer
         = f.label :looking_for, "Looking For"
         .col-sm-3
           = select_tag "account[looking_for]", options_for_select([["", ""], ["Male", "male"], ["Female", "female"], ["Any", "any"]], @account.looking_for), value: @account.looking_for, required: "required", class: 'form-control', autofocus: 'autofocus'
       div align="center"
-        .actions = f.submit 'Save'
+        .actions = f.submit 'Sign Up'

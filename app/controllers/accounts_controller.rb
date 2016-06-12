@@ -1,5 +1,6 @@
 class AccountsController < ApplicationController
   skip_before_action :authorize
+  layout "blank", only: [:new]
 
   def new
     @account = Account.new
