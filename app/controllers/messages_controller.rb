@@ -14,6 +14,9 @@ class MessagesController < ApplicationController
     messages_with = Account.where(id: params[:id]).first
     if messages_with
       @messages = current_account.messages_with messages_with
+
+      # Count the messages as read
+      @messages.where(read: false, receiver_id: current_account.id).update_all(read: true, read_at: Time.now)
     else
       #TODO what do here
       @messages = []
@@ -25,6 +28,7 @@ class MessagesController < ApplicationController
     begin
       messages_with = Account.where(id: params[:id]).first
       if messages_with
+        #TODO: this needs to be formatted into a nicer date for the message page
         messages = current_account.messages_with messages_with
       else
         #TODO what do here

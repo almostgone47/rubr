@@ -252,3 +252,32 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+/* Begin Messages */
+
+.chain-holder {
+    width: 500px;
+    max-width: 90%;
+
+    height: 600px;
+    border: 1px black solid;
+    margin: 0 auto;
+}
+
+.scrollable-content {
+    height: 580px;
+    overflow: auto;
+    background-color: white;
+}
+
+.send-message {
+    width: 500px;
+    max-width: 90%;
+
+    margin: 0 auto;
+}
+
+ul.message-list {
+    list-style-type: none;
+}
+
